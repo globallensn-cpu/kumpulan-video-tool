@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model ExtractionLog {
+  id        String   @id @default(cuid())
+  source    String   // "shopee" | "demo"
+  ok        Boolean
+  code      String?  // result code e.g. SUCCESS / NO_VIDEO / SHOPEE_BLOCKED
+  region    String?  // shopee.co.id etc
+  createdAt DateTime @default(now())
+}

@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Video yang diunggah; file fisik ada di video-data/<id>/
+model Video {
+  id           String   @id
+  originalName String
+  ext          String
+  size         Int
+  duration     Float
+  width        Int?
+  height       Int?
+  hasAudio     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  jobs         Job[]
+
+  @@index([createdAt])
+}
+
+// Satu pekerjaan pemotongan
+// status: queued | processing | done | error | cancelled
+// mode:   fast | precise
+model Job {
+  id                String    @id @default(uuid())
+  videoId           String
+  video             Video     @relation(fields: [videoId], references: [id], onDelete: Cascade)
+  status            String
+  mode              String
+  segmentDuration   Int
+  rangeStart        Float     @default(0)
+  rangeEnd          Float?
+  audioOnly         Boolean   @default(false)
+  totalDuration     Float
+  totalSegments     Int       @default(0)
+  completedSegments Int       @default(0)
+  progress          Int       @default(0)
+  error             String?
+  createdAt         DateTime  @default(now())
+  segments          Segment[]
+
+  @@index([videoId])
+  @@index([status])
+}
+
+// Satu potongan hasil (file fisik di video-data/<videoId>/jobs/<jobId>/)
+model Segment {
+  id        String @id @default(uuid())
+  jobId     String
+  job       Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  index     Int
+  file      String
+  startTime Float
+  duration  Float
+  size      Int
+
+  @@index([jobId])
+}

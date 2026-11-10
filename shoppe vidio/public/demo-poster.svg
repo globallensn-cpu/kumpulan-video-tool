@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1280" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2a1a12"/>
+      <stop offset="0.5" stop-color="#4a2415"/>
+      <stop offset="1" stop-color="#ee4d2d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <circle cx="1050" cy="140" r="220" fill="#ee4d2d" opacity="0.25"/>
+  <circle cx="180" cy="620" r="260" fill="#f5a623" opacity="0.15"/>
+  <g transform="translate(560 250) scale(3.1)">
+    <path d="M20 24.5C20 21 23.5 18.5 32 18.5C40.5 18.5 44 21 44 24.5C44 27 42 28.5 39 29" stroke="#fff" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+    <path d="M18.5 30H45.5L43.5 44.5C43.2 46.5 41.5 48 39.5 48H24.5C22.5 48 20.8 46.5 20.5 44.5L18.5 30Z" fill="#fff"/>
+  </g>
+  <text x="640" y="500" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#ffffff">Mode Demo — Video Contoh</text>
+  <text x="640" y="552" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#ffd9cc">Alur yang sama dipakai untuk video Shopee asli di server produksi</text>
+</svg>

@@ -1,0 +1,45 @@
+// ============================================================
+// TokForge — Skema database (SQLite)
+// Clip  : pool video yang diunggah kreator (sebelum digabung)
+// Job   : satu eksekusi pipeline gabung + encode + AI metadata
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Clip {
+  id           String   @id
+  filename     String
+  originalName String
+  duration     Float
+  width        Int
+  height       Int
+  fps          Float
+  size         Int
+  codec        String
+  hasAudio     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+}
+
+model Job {
+  id             String   @id @default(cuid())
+  status         String   @default("processing") // processing | done | error | canceled
+  stage          String   @default("prepare") // prepare | encode | analyze | metadata
+  progress       Int      @default(0)
+  settingsJson   String
+  clipIdsJson    String
+  clipCount      Int      @default(0)
+  error          String?
+  videoFilename  String?
+  specsJson      String?
+  contentSummary String?
+  metadataJson   String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
